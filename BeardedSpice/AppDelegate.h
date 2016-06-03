@@ -59,6 +59,8 @@ extern BOOL accessibilityApiEnabled;
     BOOL _AXAPIEnabled;
 }
 
+@property id eventMonitor;
+
 @property (nonatomic, readonly) NSWindowController *preferencesWindowController;
 
 - (IBAction)checkForUpdates:(id)sender;

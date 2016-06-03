@@ -211,6 +211,8 @@
 		967933501855173100A49AC7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9679332F1855173100A49AC7 /* Cocoa.framework */; };
 		9679335A1855173100A49AC7 /* BeardedSpiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 967933591855173100A49AC7 /* BeardedSpiceTests.m */; };
 		9679336518551BCC00A49AC7 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9679336418551BCC00A49AC7 /* ScriptingBridge.framework */; };
+		BF19EF911D0224CA0018CC6C /* MediaKey.m in Sources */ = {isa = PBXBuildFile; fileRef = BF19EF901D0224CA0018CC6C /* MediaKey.m */; };
+		BF19EF931D022DAF0018CC6C /* TvArsivi.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF19EF921D022DAF0018CC6C /* TvArsivi.plist */; };
 		D09EFF221C8CD49E00B24DA9 /* VLCTabAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = D09EFF1F1C8CD49E00B24DA9 /* VLCTabAdapter.m */; };
 		DAD858605B37FF09D3AAD082 /* libPods-BeardedSpiceControllers-BeardedSpice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28CA978C46A156EA9D1CFA4A /* libPods-BeardedSpiceControllers-BeardedSpice.a */; };
 /* End PBXBuildFile section */
@@ -450,6 +452,9 @@
 		9679336318551A8F00A49AC7 /* Chrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chrome.h; sourceTree = "<group>"; };
 		9679336418551BCC00A49AC7 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		9F9355D0AD84C962E403B8AB /* Pods-BeardedSpiceControllers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeardedSpiceControllers.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeardedSpiceControllers/Pods-BeardedSpiceControllers.release.xcconfig"; sourceTree = "<group>"; };
+		BF19EF8F1D0224CA0018CC6C /* MediaKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaKey.h; sourceTree = "<group>"; };
+		BF19EF901D0224CA0018CC6C /* MediaKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaKey.m; sourceTree = "<group>"; };
+		BF19EF921D022DAF0018CC6C /* TvArsivi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TvArsivi.plist; sourceTree = "<group>"; };
 		CBC84E9024D0B34C3324D861 /* Pods-BeardedSpiceControllers-BeardedSpice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeardedSpiceControllers-BeardedSpice.release.xcconfig"; path = "Pods/Target Support Files/Pods-BeardedSpiceControllers-BeardedSpice/Pods-BeardedSpiceControllers-BeardedSpice.release.xcconfig"; sourceTree = "<group>"; };
 		D09EFF1F1C8CD49E00B24DA9 /* VLCTabAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLCTabAdapter.m; sourceTree = "<group>"; };
 		D09EFF201C8CD49E00B24DA9 /* VLCTabAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLCTabAdapter.h; sourceTree = "<group>"; };
@@ -554,6 +559,7 @@
 		0BF06A111C95139900534083 /* MediaStrategies */ = {
 			isa = PBXGroup;
 			children = (
+				BF19EF921D022DAF0018CC6C /* TvArsivi.plist */,
 				0BF06A121C95139900534083 /* AmazonMusic.plist */,
 				0BF06A131C95139900534083 /* Audible.plist */,
 				0BF06A141C95139900534083 /* AudioMack.plist */,
@@ -787,6 +793,8 @@
 				0BF06ADE1C9513A800534083 /* BSStrategyVersionManager.m */,
 				0BF06ADF1C9513A800534083 /* BSTrack.h */,
 				0BF06AE01C9513A800534083 /* BSTrack.m */,
+				BF19EF8F1D0224CA0018CC6C /* MediaKey.h */,
+				BF19EF901D0224CA0018CC6C /* MediaKey.m */,
 				6537DAA61AF396DA002F2391 /* NativeAppTabRegistry.h */,
 				6537DAA71AF396DA002F2391 /* NativeAppTabRegistry.m */,
 				65FF756A1B36CEDF00D81CA5 /* BSLaunchAtLogin.h */,
@@ -1087,6 +1095,7 @@
 				0BF06A6D1C95139A00534083 /* Coursera.plist in Resources */,
 				0BF06AC91C95139A00534083 /* Vessel.plist in Resources */,
 				0BF06A731C95139A00534083 /* EightTracks.plist in Resources */,
+				BF19EF931D022DAF0018CC6C /* TvArsivi.plist in Resources */,
 				0BF06A671C95139A00534083 /* BugsMusic.plist in Resources */,
 				0BF06AB31C95139A00534083 /* SoundCloud.plist in Resources */,
 				0BF06ACD1C95139A00534083 /* Vk.plist in Resources */,
@@ -1215,6 +1224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF19EF911D0224CA0018CC6C /* MediaKey.m in Sources */,
 				0369231F1862936600E04DDB /* GeneralPreferencesViewController.m in Sources */,
 				0BF06AE51C9513A800534083 /* BSTrack.m in Sources */,
 				967933431855173100A49AC7 /* AppDelegate.m in Sources */,

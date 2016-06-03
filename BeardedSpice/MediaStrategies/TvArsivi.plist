@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+//
+//  TvArsivi.plist
+//  BeardedSpice
+//
+//  Created by coeligena.
+//
+-->
+<dict>
+	<!-- metadata -->
+	<key>version</key>
+	<integer>1</integer>
+	<key>displayName</key>
+	<string>TvArsivi</string>
+
+	<key>accepts</key>
+	<dict>
+		<key>predicate</key>
+		<string>SELF LIKE[c] '*tvarsivi.com/*'</string>
+		<key>tabValue</key>
+		<string>url</string> <!-- current 'url' or 'title' -->
+	</dict>
+
+	<!-- Relevant javascripts go here.
+	- Normal formatting is supported (can copy/paste with newlines and indentations)
+	- &amp; is used to escape '&' so the file is readable.
+	-->
+	<key>isPlaying</key>
+	<string>(function(){var v = flowplayer(document.querySelector(&apos;#fpdisplay&apos;)); return v.playing;})()</string>
+
+	<key>toggle</key>
+	<string>(function(){var v = flowplayer(document.querySelector(&apos;#fpdisplay&apos;)); if (!v.playing) { v.play(); } else { v.pause(); }})()</string>
+
+	<key>previous</key>
+	<string>(function(){k=$(&apos;#kanal_ileri&apos;).length &gt; 0 ? &apos;kanal&apos; : &apos;icerik&apos;; data = $(&apos;#&apos;+k+&apos;_geri&apos;).attr(&apos;rel&apos;); $.getJSON(&apos;index.php?s=ajax&amp;b=kanal_ileri_geri&apos;, {data: data}, function (json) { flowplayer($(&apos;#fpdisplay&apos;)[0]).load(json.vurl); $(&apos;#&apos;+k+&apos;_ileri&apos;).attr(&apos;rel&apos;,json.s); $(&apos;#&apos;+k+&apos;_geri&apos;).attr(&apos;rel&apos;,json.o); $(&apos;#tarih_saat_span&apos;).text(json.part_tarih_saat); });})()</string>
+
+	<key>next</key>
+	<string>(function(){k=$(&apos;#kanal_ileri&apos;).length &gt; 0 ? &apos;kanal&apos; : &apos;icerik&apos;; data = $(&apos;#&apos;+k+&apos;_ileri&apos;).attr(&apos;rel&apos;); $.getJSON(&apos;index.php?s=ajax&amp;b=kanal_ileri_geri&apos;, {data: data}, function (json) { flowplayer($(&apos;#fpdisplay&apos;)[0]).load(json.vurl); $(&apos;#&apos;+k+&apos;_ileri&apos;).attr(&apos;rel&apos;,json.s); $(&apos;#&apos;+k+&apos;_geri&apos;).attr(&apos;rel&apos;,json.o); $(&apos;#tarih_saat_span&apos;).text(json.part_tarih_saat); });})()</string>
+
+	<key>pause</key>
+	<string>(function(){var v = flowplayer(document.querySelector(&apos;#fpdisplay&apos;)); v.pause();})()</string>
+
+  <key>favorite</key>
+  <string></string>
+
+  <!-- Generate dictionary of namespaced key/values here. All manipulation should be supported in javascript.
+  - Namespaced keys currently supported include: track, album, artist, favorited, image
+  -->
+	<key>trackInfo</key>
+	<string>(function(){
+        return {
+            &apos;image&apos;: document.querySelector(&apos;#fpdisplay&apos;).style.backgroundImage.replace(/url\([&apos;&quot;]([^&apos;&quot;]+)[&apos;&quot;]\)/ig,&apos;$1&apos;),
+            &apos;track&apos;: document.querySelector(&apos;.sol .baslik&apos;).innerText,
+            &apos;artist&apos;: &apos;TvArsivi&apos;,
+        }})()</string>
+</dict>
+</plist>

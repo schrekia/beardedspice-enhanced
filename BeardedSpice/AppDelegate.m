@@ -28,6 +28,7 @@
 
 #import "runningSBApplication.h"
 
+#import "MediaKey.h"
 
 /// Because user defaults have good caching mechanism, we can use this macro.
 #define ALWAYSSHOWNOTIFICATION  [[[NSUserDefaults standardUserDefaults] objectForKey:BeardedSpiceAlwaysShowNotification] boolValue]
@@ -114,6 +115,47 @@ BOOL accessibilityApiEnabled = NO;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:BeardedSpiceUpdateAtLaunch])
         [self checkForUpdates:self];
     
+    
+    // https://github.com/jguice/mac-bt-headset-fix
+    [NSTask launchedTaskWithLaunchPath:@"/bin/launchctl" arguments:@[@"unload", @"/System/Library/LaunchAgents/com.apple.rcd.plist"]];
+    self.eventMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask|NSSystemDefinedMask)  handler:^(NSEvent * event) {
+        int keyCode = (([event data1] & 0xFFFF0000) >> 16);
+        
+        int keyFlags = ([event data1] & 0x0000FFFF);
+        
+        int keyState = (((keyFlags & 0xFF00) >> 8)) == 0xA;
+        
+        if(keyCode == 10 && keyFlags == 6972) {
+            
+            switch ([event data2]) {
+                case 786608: // Play / Pause on OS < 10.10 Yosemite
+                case 786637: // Play / Pause on OS >= 10.10 Yosemite
+                    NSLog(@"Play/Pause bluetooth keypress detected...sending corresponding media key event");
+                    [MediaKey send:NX_KEYTYPE_PLAY];
+                    break;
+                case 786611: // Next
+                    NSLog(@"Next bluetooth keypress detected...sending corresponding media key event");
+                    [MediaKey send:NX_KEYTYPE_NEXT];
+                    break;
+                case 786612: // Previous
+                    NSLog(@"Previous bluetooth keypress detected...sending corresponding media key event");
+                    [MediaKey send:NX_KEYTYPE_PREVIOUS];
+                    break;
+                case 786613: // Fast-forward
+                    NSLog(@"Fast-forward bluetooth keypress detected...sending corresponding media key event");
+                    [MediaKey send:NX_KEYTYPE_FAST];
+                    break;
+                case 786614: // Rewind
+                    NSLog(@"Rewind bluetooth keypress detected...sending corresponding media key event");
+                    [MediaKey send:NX_KEYTYPE_REWIND];
+                    break;
+                default:
+                    // TODO make this popup a message in the UI (with a link to submit the issue and a "don't show this message again" checkbox)
+                    NSLog(@"Unknown bluetooth key received.  Please visit https://github.com/jguice/mac-bt-headset-fix/issues and submit an issue describing what you expect the key to do (include the following data): keyCode:%i keyFlags:%i keyState:%i %li",keyCode,keyFlags,keyState,(long)[event data2]);
+                    break;
+            }
+        }
+    }];
 }
 
 - (void)awakeFromNib
@@ -957,8 +999,14 @@ BOOL accessibilityApiEnabled = NO;
 
 // Must be invoked in workingQueue
 - (void)autoSelectTabWithForceFocused:(BOOL)forceFucused{
-
-    [self refreshTabs:self];
+    
+    // check tab functionality
+    @try {
+        if (!activeTab || ![activeTab respondsToSelector:@selector(check)] || ![activeTab check])
+            [self refreshTabs:self];
+    } @catch (NSException *exception) {
+        [self refreshTabs:self];
+    }
 
     switch (playingTabs.count) {
 
@@ -976,7 +1024,6 @@ BOOL accessibilityApiEnabled = NO;
             }
 
             if (!activeTab) {
-
                 //try to set active tab to first item of menu
                 TabAdapter *tab = [[statusMenu itemAtIndex:0] representedObject];
                 if (tab)

@@ -115,6 +115,8 @@
     <integer>1</integer>
     <key>TidalHiFi</key>
     <integer>1</integer>
+  	<key>TvArsivi</key>
+  	<integer>1</integer>
     <key>TuneIn</key>
     <integer>1</integer>
     <key>TwentyTwoTracks</key>
